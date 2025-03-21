@@ -37,6 +37,16 @@ const Home = () => {
       <span className='w-full h-px rounded-full bg-black' />
 
       <Link
+        href="/threejs-0"
+        prefetch={false}
+        className='px-8 py-4 bg-red-500 hover:bg-red-600 transition-all duration-100 rounded-lg !text-white text-lg'
+      >
+        sample threejs 0
+      </Link>
+
+      <span className='w-full h-px rounded-full bg-black' />
+
+      <Link
         href="/threejs-1"
         prefetch={false}
         className='px-8 py-4 bg-red-500 hover:bg-red-600 transition-all duration-100 rounded-lg !text-white text-lg'
@@ -72,6 +82,16 @@ const Home = () => {
         className='px-8 py-4 bg-red-500 hover:bg-red-600 transition-all duration-100 rounded-lg !text-white text-lg'
       >
         sample threejs 4
+      </Link>
+
+      <span className='w-full h-px rounded-full bg-black' />
+
+      <Link
+        href="/threejs-5"
+        prefetch={false}
+        className='px-8 py-4 bg-red-500 hover:bg-red-600 transition-all duration-100 rounded-lg !text-white text-lg'
+      >
+        sample threejs 5
       </Link>
 
     </div>

@@ -48,7 +48,7 @@ function CarModel({ doorOpen }: { doorOpen: boolean }) {
     return <primitive object={scene} />
 }
 
-export default function Home() {
+export default function ThreeJs5() {
     const [doorOpen, setDoorOpen] = useState(false)
 
     return (
