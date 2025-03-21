@@ -3,9 +3,10 @@
 import { useAnimations, useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import React, { useEffect } from 'react'
-import { Color } from 'three'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import * as THREE from 'three';
+import { Color, TextureLoader } from 'three';
 
 interface PropsType {
     path: string,
@@ -29,6 +30,7 @@ const Three0 = (props: PropsType) => {
 
         return <primitive object={scene} />
     } else {
+        // handle loaders
         const dracoLoader = new DRACOLoader();
         dracoLoader.setDecoderPath('/draco/');
         const gltfLoader = new GLTFLoader();
@@ -38,10 +40,9 @@ const Three0 = (props: PropsType) => {
             loader.setDRACOLoader(dracoLoader);
         });
 
+        // handle animations
         const { actions, names } = useAnimations(gltf.animations, gltf.scene)
-
         console.log('animation names:', names)
-
         useEffect(() => {
             if (actions) {
                 names?.forEach((name: string) => {
@@ -50,6 +51,30 @@ const Three0 = (props: PropsType) => {
             }
         }, [actions])
 
+
+        // handle textures
+        const arashTexture = useLoader(
+            TextureLoader,
+            '/arash.jpg'
+        )
+        useEffect(() => {
+            if (gltf) {
+                gltf.scene.traverse((child: any) => {
+                    if (child.isMesh) {
+                        if (child.material.name == "bodyMAT") {
+                            child.material = new THREE.MeshStandardMaterial({
+                                map: arashTexture,
+                                roughnessMap: arashTexture,
+                                aoMap: arashTexture,
+                                normalMap: arashTexture
+                            })
+                        }
+                    }
+                })
+            }
+        }, [gltf])
+
+        // handle materials
         useEffect(() => {
             if (gltf) {
                 gltf.scene.traverse((child: any) => {
