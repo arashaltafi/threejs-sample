@@ -13,6 +13,7 @@ const SplineSample = () => {
                 <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
                 <Spline scene="https://prod.spline.design/SDqBVKajWdVwV-uz/scene.splinecode" />
                 <Spline scene="https://prod.spline.design/4hEQkrrTZ6PyKf1C/scene.splinecode" />
+                <Spline scene="https://prod.spline.design/gzhT5aKCi79fkfdC/scene.splinecode" />
             </div>
         </div>
     )
