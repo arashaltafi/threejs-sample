@@ -3,6 +3,7 @@
 import { useAnimations, useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import React, { useEffect } from 'react'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 interface PropsType {
@@ -25,7 +26,14 @@ const Three0 = (props: PropsType) => {
 
         return <primitive object={scene} />
     } else {
-        const gltf = useLoader(GLTFLoader, props.path);
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath('/draco/');
+        const gltfLoader = new GLTFLoader();
+        gltfLoader.setDRACOLoader(dracoLoader);
+
+        const gltf = useLoader(GLTFLoader, props.path, (loader) => {
+            loader.setDRACOLoader(dracoLoader);
+        });
 
         console.log('gltf:', gltf)
 
