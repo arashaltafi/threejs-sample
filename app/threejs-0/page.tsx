@@ -34,7 +34,7 @@ const ThreeJs0 = () => {
                 <ContactShadows />
                 <Loader />
                 <Suspense fallback={null}>
-                    <Three0 isWay1={true} path="/car-model.glb" />
+                    <Three0 isWay1={false} path="/car-model.glb" />
                 </Suspense>
 
                 {/* <mesh>

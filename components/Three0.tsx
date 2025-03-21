@@ -3,6 +3,7 @@
 import { useAnimations, useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import React, { useEffect } from 'react'
+import { Color } from 'three'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
@@ -19,8 +20,10 @@ const Three0 = (props: PropsType) => {
         console.log('animation names:', names)
 
         useEffect(() => {
-            if (actions && actions['Take 001']) {
-                actions['Take 001'].play()
+            if (actions) {
+                names?.forEach((name: string) => {
+                    actions[name]?.reset().play()
+                })
             }
         }, [actions])
 
@@ -35,7 +38,44 @@ const Three0 = (props: PropsType) => {
             loader.setDRACOLoader(dracoLoader);
         });
 
-        console.log('gltf:', gltf)
+        const { actions, names } = useAnimations(gltf.animations, gltf.scene)
+
+        console.log('animation names:', names)
+
+        useEffect(() => {
+            if (actions) {
+                names?.forEach((name: string) => {
+                    actions[name]?.reset().play()
+                })
+            }
+        }, [actions])
+
+        useEffect(() => {
+            if (gltf) {
+                gltf.scene.traverse((child: any) => {
+                    if (child.isMesh) {
+                        child.material.metalness = 1.5
+                        child.material.roughness = 0.1
+                        child.castShadow = true
+                        child.receiveShadow = true
+                        child.material.needsUpdate = true
+                        if (child.material.name == "glass") {
+                            child.material.color = new Color(0x000000)
+                            child.material.opacity = 0.5
+                        }
+                        if (child.material.name == "matte") {
+                            child.material.color = new Color(0xff0000)
+                            child.material.opacity = 1
+                        }
+                        if (child.material.name == "bodyMAT") {
+                            child.material.color = new Color(0xffffff)
+                            child.material.opacity = 1
+                        }
+                        console.log('material name:', child.material.name)
+                    }
+                })
+            }
+        }, [gltf])
 
         return <primitive object={gltf.scene} />;
     }
