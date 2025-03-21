@@ -16,10 +16,10 @@ const ThreeJs0 = () => {
                 }}
             >
                 <ambientLight intensity={1} />
-                <pointLight position={[10, 10, 10]} />
-                <directionalLight intensity={1} position={[0, 10, 5]} />
-                <PerspectiveCamera makeDefault position={[50, 10, 20]} />
-                <Environment colorSpace='srgb-linear' preset="studio" />
+                <pointLight position={[10, 10, 10]} intensity={2} />
+                <directionalLight intensity={1} position={[10, 10, 5]} />
+                <PerspectiveCamera makeDefault position={[1, 1, 1]} />
+                <Environment preset="studio" />
                 <OrbitControls
                     enableDamping={true}
                     enableRotate={true}
@@ -34,15 +34,8 @@ const ThreeJs0 = () => {
                 <ContactShadows />
                 <Loader />
                 <Suspense fallback={null}>
-                    <Three0 isWay1={false} path="/car-model.glb" />
+                    <Three0 isWay1={false} path="/shirt.glb" />
                 </Suspense>
-
-                {/* <mesh>
-                    <boxGeometry args={[1, 1, 2]} />
-                    <torusGeometry args={[1, 0.4, 16, 100]} />
-                    <shadowMaterial opacity={0.5} />
-                    <meshStandardMaterial color={'red'} />
-                </mesh> */}
             </Canvas>
         </div>
     )

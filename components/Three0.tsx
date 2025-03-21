@@ -55,24 +55,39 @@ const Three0 = (props: PropsType) => {
         // handle textures
         const arashTexture = useLoader(
             TextureLoader,
-            '/arash.jpg'
+            '/arash.jpg' //'/bg-red.png'
         )
+        // Set custom repeat values on the texture
+        useEffect(() => {
+            if (arashTexture) {
+                arashTexture.wrapS = THREE.RepeatWrapping;
+                arashTexture.wrapT = THREE.RepeatWrapping;
+                // Use only 50% of the texture, so it will be scaled down
+                arashTexture.repeat.set(1, 1);
+                // Offset by 25% so that it is centered in the full UV space
+                arashTexture.offset.set(0.25, 0.25);
+                arashTexture.needsUpdate = true;
+                arashTexture.rotation = 1
+                arashTexture.center = new THREE.Vector2(0.5, 0.5);
+            }
+        }, [arashTexture]);
+
+        // Apply the texture to your material when the glTF is loaded
         useEffect(() => {
             if (gltf) {
                 gltf.scene.traverse((child: any) => {
-                    if (child.isMesh) {
-                        if (child.material.name == "bodyMAT") {
+                    if (child instanceof THREE.Mesh) {
+                        if (child.material.name === "lambert1") {
                             child.material = new THREE.MeshStandardMaterial({
                                 map: arashTexture,
                                 roughnessMap: arashTexture,
                                 aoMap: arashTexture,
-                                normalMap: arashTexture
-                            })
+                            });
                         }
                     }
-                })
+                });
             }
-        }, [gltf])
+        }, [gltf, arashTexture]);
 
         // handle materials
         useEffect(() => {
