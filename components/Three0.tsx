@@ -1,6 +1,6 @@
 "use client"
 
-import { useAnimations, useGLTF } from '@react-three/drei'
+import { useAnimations, useGLTF, useTexture } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import React, { useEffect } from 'react'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
@@ -53,6 +53,7 @@ const Three0 = (props: PropsType) => {
 
 
         // handle textures
+        const arashTexture2 = useTexture('/arash.jpg');
         const arashTexture = useLoader(
             TextureLoader,
             '/arash.jpg' //'/bg-red.png'

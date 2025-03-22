@@ -14,6 +14,9 @@ const ThreeJs0 = () => {
                     width: "100%",
                     height: "100%",
                 }}
+                shadows
+                camera={{ position: [0, 0, 0], fov: 25 }}
+                gl={{ preserveDrawingBuffer: true }}
             >
                 <ambientLight intensity={1} />
                 <pointLight position={[10, 10, 10]} intensity={2} />
